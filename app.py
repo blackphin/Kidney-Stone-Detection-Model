@@ -10,10 +10,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import load_model
-
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
-
-
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
 
 from sklearn.metrics import f1_score
