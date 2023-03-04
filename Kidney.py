@@ -47,7 +47,9 @@ def F1_score(y_true, y_pred):  # taken from old keras source code
     return f1_val
 
 
-model = load_model(r"D:\Repositories\Kidney-Stone-Detection-Model\Final.h5", custom_objects={"F1_score": f1_score})
+model = load_model(r"D:\Repositories\Kidney-Stone-Detection-Model\Final.h5",
+                   custom_objects={"F1_score": f1_score})
+
 
 def recog_model(img_path):
     img = cv2.imread(img_path)
@@ -65,7 +67,8 @@ def recog_model(img_path):
     return (str(predicted_class+" detected with a confidence of"+confidence+"%"))
 
 
-demo = gr.Interface(fn=recog_model, inputs=gr.Image(image_mode="L", type = "filepath"), outputs=gr.Label(label="Model Prediction"), allow_flagging="never")
+demo = gr.Interface(fn=recog_model, inputs=gr.Image(image_mode="L", type="filepath"),
+                    outputs=gr.Label(label="Model Prediction"), allow_flagging="never")
 
 if __name__ == "__main__":
     demo.launch()
