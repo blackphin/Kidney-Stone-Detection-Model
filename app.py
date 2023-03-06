@@ -5,17 +5,15 @@ import pandas as pd
 import numpy as np
 from matplotlib.pyplot import imread
 import seaborn as sns
+import cv2
 
 import tensorflow as tf
-from tensorflow import keras
 from tensorflow.keras import backend as K
 from tensorflow.keras.models import load_model
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
 from tensorflow.keras.applications.imagenet_utils import preprocess_input
 
 from sklearn.metrics import f1_score
-
-import cv2
 
 
 import gradio as gr
@@ -58,12 +56,12 @@ def recog_model(img_path):
     # convert the prediction to a class label
     classes = ['Tumor', 'Cyst', 'Normal', 'Stone']
     predicted_class = classes[np.argmax(prediction[0])]
-    confidence = str(round(100 * (np.max(prediction[0])), 2))
-    return (str(predicted_class+" detected with a confidence of"+confidence+"%"))
+    confidence = str(100 * (np.max(prediction[0])))
+    return (str(predicted_class+" detected with a confidence of "+confidence+"%"))
 
 
-demo = gr.Interface(fn=recog_model, inputs=gr.Image(image_mode="L", type="filepath"),
-                    outputs=gr.Label(label="Model Prediction"), allow_flagging="never")
+demo = gr.Interface(fn=recog_model, inputs=gr.Image(image_mode="L", type="filepath", label="Input Image"),
+                    outputs=gr.Label(label="Model Prediction"), allow_flagging="never", examples=[r"demo\Cyst.jpg", r"demo\Normal.jpg", r"demo\Stone.jpg", r"demo\Tumor.jpg"])
 
 if __name__ == "__main__":
     demo.launch()
