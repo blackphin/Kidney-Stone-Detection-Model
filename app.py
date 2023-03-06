@@ -3,7 +3,6 @@ import os
 
 import pandas as pd
 import numpy as np
-from matplotlib.pyplot import imread
 import seaborn as sns
 import cv2
 
@@ -50,7 +49,6 @@ def recog_model(img_path):
     x = np.expand_dims(img, axis=0)
     x = preprocess_input(x)
 
-    my_image = imread(img_path)
     prediction = model.predict(x)
 
     # convert the prediction to a class label
@@ -63,5 +61,4 @@ def recog_model(img_path):
 demo = gr.Interface(fn=recog_model, inputs=gr.Image(image_mode="L", type="filepath", label="Input Image"),
                     outputs=gr.Label(label="Model Prediction"), allow_flagging="never", examples=[r"demo\Cyst.jpg", r"demo\Normal.jpg", r"demo\Stone.jpg", r"demo\Tumor.jpg"])
 
-if __name__ == "__main__":
-    demo.launch()
+demo.launch()
