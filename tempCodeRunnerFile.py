@@ -1,0 +1,1 @@
+classes = ['Tumor', 'Cyst', 'Normal', 'Stone']
